@@ -1,0 +1,7 @@
+# Mac
+.DS_Store
+
+# Contents
+.vagrant/
+shared_folder/**
+!shared_folder/README.md
