@@ -1,0 +1,16 @@
+---
+# https://launchpad.net/~git-core/+archive/ubuntu/ppa
+# You can update your system with unsupported packages from this untrusted PPA by adding
+# ppa:git-core/ppa to your system's Software Sources. (Read about installing)
+- name: Add git repositories to fetch the latest git package
+  apt_repository:
+    repo: ppa:git-core/ppa
+
+- name: Install NPM & Nodejs
+  command: snap install node --classic --channel=12
+
+- name: Update and upgrade apt packages
+  become: true
+  apt:
+    upgrade: 'yes'
+    update_cache: yes

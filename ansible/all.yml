@@ -1,0 +1,6 @@
+---
+- name: setup local
+  hosts: localhost
+  become: true
+  roles:
+    - common
