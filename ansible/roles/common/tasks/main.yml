@@ -9,6 +9,11 @@
 - name: Install NPM & Nodejs
   command: snap install node --classic --channel=12
 
+- name: Install Keychain
+  become: true
+  apt:
+    name: keychain
+
 - name: Update and upgrade apt packages
   become: true
   apt:
