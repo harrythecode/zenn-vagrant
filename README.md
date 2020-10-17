@@ -38,7 +38,7 @@ See more hacks on [wpscholar/vagrant-cheat-sheet.md](https://gist.github.com/wps
 
 ## How to play around Zenn-CLI on vagrant?
 
-Since the pre-defined [bootsrap.sh](./bootsrap.sh) will install & set up zenn-cli, you can just begin with using it!
+Since the pre-defined [bootstrap.sh](./bootstrap.sh) will install & set up zenn-cli, you can just begin with using it!
 
 ### After vagrant ssh
 
