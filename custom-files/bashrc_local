@@ -1,0 +1,72 @@
+###
+# Common Setup
+###
+# https://gist.github.com/tstellanova/76ee01c1599d9a9433cf
+/usr/bin/keychain --lockwait 0 $HOME/.ssh/id_rsa
+source $HOME/.keychain/$HOSTNAME-sh
+# //
+###
+
+###
+# Git Status
+# - https://ljones.dev/blog/bash-git-prompt/
+###
+# get current status of git repo
+function parse_git_dirty {
+  STATUS="$(git status 2> /dev/null)"
+  if [[ $? -ne 0 ]]; then printf "-"; return; else printf "["; fi
+  if echo ${STATUS} | grep -c "renamed:"         &> /dev/null; then printf ">"; else printf ""; fi
+  if echo ${STATUS} | grep -c "branch is ahead:" &> /dev/null; then printf "!"; else printf ""; fi
+  if echo ${STATUS} | grep -c "new file::"       &> /dev/null; then printf "+"; else printf ""; fi
+  if echo ${STATUS} | grep -c "Untracked files:" &> /dev/null; then printf "?"; else printf ""; fi
+  if echo ${STATUS} | grep -c "modified:"        &> /dev/null; then printf "*"; else printf ""; fi
+  if echo ${STATUS} | grep -c "deleted:"         &> /dev/null; then printf "-"; else printf ""; fi
+  printf "]"
+}
+
+function parse_git_branch() {
+  # Long form
+  git rev-parse --abbrev-ref HEAD 2> /dev/null
+  # Short form
+  # git rev-parse --abbrev-ref HEAD 2> /dev/null | sed -e 's/.*\/\(.*\)/\1/'
+}
+
+function parse_git_username() {
+  	USERNAME=`git config user.name`
+    if [ ! "${USERNAME}" == "" ]
+    then
+        echo "[${USERNAME}]"
+    else
+        echo "[(NotFoundGitUser)]"
+    fi
+}
+# //
+###
+
+###
+# Color Hack
+# - https://qiita.com/ko1nksm/items/095bdb8f0eca6d327233
+# - https://qiita.com/hmmrjn/items/60d2a64c9e5bf7c0fe60
+# - https://www.schemecolor.com/
+# - http://blog.totodotnet.net/2011/09/bashprompt.html
+# - http://bashrcgenerator.com/
+###
+ESC=$(printf '\033') RESET="\[${ESC}[0m\]"
+BOLD="${ESC}[1m"
+COLOR_RED="\[${ESC}[38;2;200;10;10m\]"
+
+SCHEM_VAGRANT_01="\[${BOLD}${ESC}[38;2;130;252;134m\]"
+SCHEM_VAGRANT_02="\[${BOLD}${ESC}[38;2;51;194;254m\]"
+SCHEM_VAGRANT_03="\[${BOLD}${ESC}[38;2;255;205;0m\]"
+# //
+###
+
+###
+# main
+###
+__export_ps1() {
+  export PS1="${SCHEM_VAGRANT_01}\u@\$(parse_git_username)${RESET}(\$(parse_git_branch)${COLOR_RED}\$(parse_git_dirty)${RESET}):${SCHEM_VAGRANT_02}\w${RESET}$ "
+}
+__export_ps1
+# //
+###

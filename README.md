@@ -38,7 +38,22 @@ See more hacks on [wpscholar/vagrant-cheat-sheet.md](https://gist.github.com/wps
 
 ## How to play around Zenn-CLI on vagrant?
 
-Since the pre-defined [bootstrap.sh](./bootstrap.sh) will install & set up zenn-cli, you can just begin with using it!
+You need to set up zenn cli by following the [official tutorial](https://zenn.dev/zenn/articles/install-zenn-cli)
+
+```
+$ cd shared_folder
+$ yarn add zenn-cli
+$ npx zenn init
+```
+
+I leave it to you whether you will set up zenn-cli manually or automatically. That's because zenn has a GitHub deploy-feature and you'd probably have your repository under the shared_folder. So it's better to initialize zenn-cli under the repo.
+
+However, you can define the command below in [bootstrap.sh](./bootstrap.sh) if you don't need to have a separate folder under the shared_folder.
+
+```
+# Initial Set up for zenn-cli
+mkdir -p /home/vagrant/shared_folder && cd /home/vagrant/shared_folder && yarn add zenn-cli && npx zenn init
+```
 
 ### After vagrant ssh
 

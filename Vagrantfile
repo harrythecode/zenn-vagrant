@@ -25,14 +25,8 @@ Vagrant.configure("2") do |config|
     v.customize ["modifyvm", :id,
       "--clipboard", "bidirectional", # Share Clipboard
       "--draganddrop", "bidirectional", # Enable Drag & Drop
-      "--natdnshostresolver1", "on"
+      "--natdnshostresolver1", "on" # https://www.virtualbox.org/manual/ch09.html#nat_host_resolver_proxy
     ]
-
-    # https://stackoverflow.com/questions/19490652/how-to-sync-time-on-host-wake-up-within-virtualbox
-    v.customize [ "guestproperty", "set", :id, "/VirtualBox/GuestAdd/VBoxService/--timesync-set-threshold", 10000 ]
-
-    # https://github.com/libry-inc/homestead/pull/11
-    v.customize ["setextradata", :id, "VBoxInternal/Devices/VMMDev/0/Config/GetHostTimeDisabled", 0]
   end
 
   # Play ansible

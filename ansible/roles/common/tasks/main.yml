@@ -6,6 +6,11 @@
   apt_repository:
     repo: ppa:git-core/ppa
 
+- name: Install pip3
+  apt:
+    name: python3-pip
+    state: latest
+
 - name: Install NPM & Nodejs
   command: snap install node --classic --channel=12
 
@@ -13,6 +18,11 @@
   become: true
   apt:
     name: keychain
+
+- name: Install Chrony
+  become: true
+  apt:
+    name: chrony
 
 - name: Update and upgrade apt packages
   become: true
