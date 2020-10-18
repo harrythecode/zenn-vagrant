@@ -14,7 +14,7 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "../zenn-vagrant", "/home/vagrant/zenn-vagrant",
                             create: true, owner: 'vagrant', group: 'vagrant', fsnotify: false
 
-  config.vm.synced_folder "./shared_folder", "/home/vagrant/shared_folder",
+  config.vm.synced_folder "./shared-folder", "/home/vagrant/shared-folder",
                             create: true, owner: 'vagrant', group: 'vagrant', fsnotify: true
 
   config.vm.provider "virtualbox" do |v|
