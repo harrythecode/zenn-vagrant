@@ -37,7 +37,7 @@ See more hacks on [wpscholar/vagrant-cheat-sheet.md](https://gist.github.com/wps
 
 ### Quick Tips
 To apply your changes on vagrant:
-* When you've changed something in [Vagrantfile](./Vagrantfile): `$ vagrant provision`
+* When you've changed something in [Vagrantfile](./Vagrantfile): `$ vagrant reload`
 * When you've changed something in [bootstrap.sh](./bootstrap.sh), [custom-files/bashrc_local](./custom-files/bashrc_local) or [ansible](./ansible) : `$ vagrant provision`
 
 ## (Optional) SSH Key & Githu setup
