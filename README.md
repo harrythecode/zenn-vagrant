@@ -38,11 +38,11 @@ See more hacks on [wpscholar/vagrant-cheat-sheet.md](https://gist.github.com/wps
 ### Quick Tips
 To apply your changes on vagrant:
 * When you've changed something in [Vagrantfile](./Vagrantfile): `$ vagrant reload`
-* When you've changed something in [bootstrap.sh](./bootstrap.sh), [custom-files/bashrc_local](./custom-files/bashrc_local) or [ansible](./ansible) : `$ vagrant provision`
+* When you've changed something in [bootstrap.sh](./bootstrap.sh), [10-custom-files/bashrc_local](./10-custom-files/bashrc_local) or [ansible](./ansible) : `$ vagrant provision`
 
 ## (Optional) SSH Key & Githu setup
 
-By default, this vagrant tries to load `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub` so that you can use ssh to connect github. This config is pre-defined in [custom-files/bashrc_local](./custom-files/bashrc_local). If you'd like to use HTTPS then can remove that. Don't forget `$ chmod 400 ~/.ssh/id_rsa` to load the key properly.
+By default, this vagrant tries to load `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub` so that you can use ssh to connect github. This config is pre-defined in [10-custom-files/bashrc_local](./10-custom-files/bashrc_local). If you'd like to use HTTPS then can remove that. Don't forget `$ chmod 400 ~/.ssh/id_rsa` to load the key properly.
 
 You can also set up a global git user: `$ git config --global --edit`.
 
@@ -51,25 +51,25 @@ You can also set up a global git user: `$ git config --global --edit`.
 You need to set up zenn cli by following the [official tutorial](https://zenn.dev/zenn/articles/install-zenn-cli)
 
 ```
-$ cd shared-folder
+$ cd 00-shared-folder
 $ yarn add zenn-cli
 $ npx zenn init
 ```
 
-I leave it to you whether you will set up zenn-cli manually or automatically. That's because zenn has a GitHub deploy-feature and you'd probably have your repository under the shared-folder. So it's better to initialize zenn-cli under the repo.
+I leave it to you whether you will set up zenn-cli manually or automatically. That's because zenn has a GitHub deploy-feature and you'd probably have your repository under the 00-shared-folder. So it's better to initialize zenn-cli under the repo.
 
-However, you can define the command below in [bootstrap.sh](./bootstrap.sh) if you don't need to have a separate folder under the shared-folder.
+However, you can define the command below in [bootstrap.sh](./bootstrap.sh) if you don't need to have a separate folder under the 00-shared-folder.
 
 ```
 # Initial Set up for zenn-cli
-mkdir -p /home/vagrant/shared-folder && cd /home/vagrant/shared-folder && yarn add zenn-cli && npx zenn init
+mkdir -p /home/vagrant/00-shared-folder && cd /home/vagrant/00-shared-folder && yarn add zenn-cli && npx zenn init
 ```
 
 ### After zenn-cli setup
 
 ```
-~$ cd shared-folder
-~/shared-folder$ npx zenn help
+~$ cd 00-shared-folder
+~/00-shared-folder$ npx zenn help
 
 Command:
   zenn init         コンテンツ管理用のディレクトリを作成。初回のみ実行
@@ -82,17 +82,17 @@ Command:
   👇詳細
   https://zenn.dev/zenn/articles/zenn-cli-guide
 
-~/shared-folder$ npx zenn new:article
+~/00-shared-folder$ npx zenn new:article
 📄8261d9e2502e87b48812.md created.
 
-~/shared-folder$ npx zenn preview
+~/00-shared-folder$ npx zenn preview
 👀Preview on http://localhost:8000
 ```
 
 You can access http://localhost:8000 and see the preview. See more details at the official document 👉 https://zenn.dev/zenn/articles/zenn-cli-guide
 
 # FAQ
-## What is the `shared-folder` for?
+## What is the `00-shared-folder` for?
 
 It's used to share content between your Host and Guest machine. You can open the folder and edit files.
 

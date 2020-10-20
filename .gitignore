@@ -3,5 +3,5 @@
 
 # Contents
 .vagrant/
-shared-folder/**
-!shared-folder/README.md
+00-shared-folder/**
+!00-shared-folder/README.md
