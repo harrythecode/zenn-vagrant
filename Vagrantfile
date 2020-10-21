@@ -14,8 +14,8 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "../zenn-vagrant", "/home/vagrant/zenn-vagrant",
                             create: true, owner: 'vagrant', group: 'vagrant', fsnotify: false
 
-  config.vm.synced_folder "./shared-folder", "/home/vagrant/shared-folder",
-                            create: true, owner: 'vagrant', group: 'vagrant', fsnotify: true
+  config.vm.synced_folder "./00-shared-folder", "/home/vagrant/00-shared-folder",
+                            create: true, owner: 'vagrant', group: 'vagrant', fsnotify: true, exclude: [".git/", "node_modules/"]
 
   config.vm.provider "virtualbox" do |v|
     v.memory = 2048
