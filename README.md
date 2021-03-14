@@ -4,6 +4,7 @@ This helps you to build a vagrant for writing articles at Zenn (https://zenn.dev
 
 ## Prerequisites
 
+* [Connect Zenn to Github Repo](https://zenn.dev/zenn/articles/connect-to-github)
 * [Vagrant](https://www.vagrantup.com/)
 * [Virtualbox](https://www.virtualbox.org/)
 * (Optional) [vagrant-fsnotify](https://github.com/adrienkohlbecker/vagrant-fsnotify)
@@ -40,7 +41,7 @@ To apply your changes on vagrant:
 * When you've changed something in [Vagrantfile](./Vagrantfile): `$ vagrant reload`
 * When you've changed something in [bootstrap.sh](./bootstrap.sh), [10-custom-files/bashrc_local](./10-custom-files/bashrc_local) or [ansible](./ansible) : `$ vagrant provision`
 
-## (Optional) Default SSH Key & Github Setup
+## Default SSH Key & Github Setup
 
 By default, this vagrant tries to load `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub` so that you can use ssh to connect github. You can create such files if you want to use SSH.
 
