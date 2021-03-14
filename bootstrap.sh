@@ -19,3 +19,7 @@ if [ -f /home/vagrant/zenn-vagrant/10-custom-files/bashrc_local ]; then
     echo "Found bashrc_local file & copy it to ~/.bashrc_local"
     cp /home/vagrant/zenn-vagrant/10-custom-files/bashrc_local /home/vagrant/.bashrc_local
 fi
+
+# Enable Time Sync
+sudo systemctl enable systemd-timesyncd.service
+sudo systemctl start systemd-timesyncd.service

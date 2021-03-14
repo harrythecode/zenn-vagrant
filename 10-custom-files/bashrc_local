@@ -2,6 +2,7 @@
 # Common Setup
 ###
 # https://gist.github.com/tstellanova/76ee01c1599d9a9433cf
+# Load Private key on login. You can comment out if you don't want to use.
 /usr/bin/keychain --lockwait 0 $HOME/.ssh/id_rsa
 source $HOME/.keychain/$HOSTNAME-sh
 # //

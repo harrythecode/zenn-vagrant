@@ -1,6 +1,6 @@
 # zenn-vagrant
 
-This Vagrant helps you build a cozy environment for writing articles in Zenn (https://zenn.dev/). Vagrant is an awesome tool that you can have the same environment & version on different clients. You can also test whatever you want then delete the env and then create from a scratch easily.
+This helps you to build a vagrant for writing articles at Zenn (https://zenn.dev/). Vagrant is an awesome tool that you can have the same configurations & version on different clients.
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ On 2020-10-14, I've tested & verified this vagrant env with the items below:
 
 # How to use
 
-I recommend you to use `yarn` instead `npm` on vagrant since npm has a critical [bug](https://github.com/npm/npm/issues/7308#issuecomment-209463993). You can work around the issue by creating a symlink of a node_modules folder though, `yarn` works much better and you don't need to perform the workaround. 
+I recommend you to use `yarn` instead `npm` on vagrant since npm has a critical [bug](https://github.com/npm/npm/issues/7308#issuecomment-209463993). There is a workaround for the issue to create a symlink of a node_modules folder though, `yarn` works much better.
 
 ## Vagrant setup from a scratch
 
@@ -33,16 +33,25 @@ $ vagrant up
 $ vagrant ssh
 ```
 
-See more hacks on [wpscholar/vagrant-cheat-sheet.md](https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4)
+See more commands on [wpscholar/vagrant-cheat-sheet.md](https://gist.github.com/wpscholar/a49594e2e2b918f4d0c4)
 
 ### Quick Tips
 To apply your changes on vagrant:
 * When you've changed something in [Vagrantfile](./Vagrantfile): `$ vagrant reload`
 * When you've changed something in [bootstrap.sh](./bootstrap.sh), [10-custom-files/bashrc_local](./10-custom-files/bashrc_local) or [ansible](./ansible) : `$ vagrant provision`
 
-## (Optional) SSH Key & Githu setup
+## (Optional) Default SSH Key & Github Setup
 
-By default, this vagrant tries to load `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub` so that you can use ssh to connect github. This config is pre-defined in [10-custom-files/bashrc_local](./10-custom-files/bashrc_local). If you'd like to use HTTPS then can remove that. Don't forget `$ chmod 400 ~/.ssh/id_rsa` to load the key properly.
+By default, this vagrant tries to load `~/.ssh/id_rsa` and `~/.ssh/id_rsa.pub` so that you can use ssh to connect github. You can create such files if you want to use SSH.
+
+* e.g.,) Create RSA key (4096 bits) with passphrase: `ssh-keygen -t rsa -b 4096`
+
+This ssh-config is pre-defined in [10-custom-files/bashrc_local](./10-custom-files/bashrc_local). If you'd like to use HTTPS then can comment out below.
+
+```
+/usr/bin/keychain --lockwait 0 $HOME/.ssh/id_rsa
+source $HOME/.keychain/$HOSTNAME-sh
+```
 
 You can also set up a global git user: `$ git config --global --edit`.
 
@@ -56,7 +65,7 @@ $ yarn add zenn-cli
 $ npx zenn init
 ```
 
-I leave it to you whether you will set up zenn-cli manually or automatically. That's because zenn has a GitHub deploy-feature and you'd probably have your repository under the 00-shared-folder. So it's better to initialize zenn-cli under the repo.
+I leave it to you whether you will set up zenn-cli manually or automatically. That's because zenn has a GitHub deploy-feature and you'd probably have your repository under the 00-shared-folder. So it might be better to initialize zenn-cli under the repo.
 
 However, you can define the command below in [bootstrap.sh](./bootstrap.sh) if you don't need to have a separate folder under the 00-shared-folder.
 
@@ -94,9 +103,9 @@ You can access http://localhost:8000 and see the preview. See more details at th
 # FAQ
 ## What is the `00-shared-folder` for?
 
-It's used to share content between your Host and Guest machine. You can open the folder and edit files.
+That'll be used for sharing content between your Host and Guest machine. You can open the folder and edit files.
 
-## When I run `zenn preview` on the Guest machine, it does not render changes on the Host machine.
+## When I run `npx zenn preview` on Guest machine, it does not automatically render changes on Host machine.
 
 I recommend you to use [vagrant-fsnotify](https://github.com/adrienkohlbecker/vagrant-fsnotify). Install it with `$ vagrant plugin install vagrant-fsnotify`, and when the guest machine is up, run the following:
 ```
@@ -108,5 +117,3 @@ I've configured like this in my bash_profile:
 alias vs-zenn="cd ~/<your-path-to>/zenn-vagrant/ && vagrant up && vagrant ssh"
 alias vs-zenn-watch="cd ~/<your-path-to>/zenn-vagrant/ && vagrant up && vagrant fsnotify"
 ```
-
-So basically you'll open two terminals: one for watching changes on the Host machine, and another for accessing Guest machine :)
